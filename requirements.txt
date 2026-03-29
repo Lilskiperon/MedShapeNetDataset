@@ -1,0 +1,25 @@
+# Core deep learning
+torch>=2.0.0
+torchvision>=0.15.0
+
+# 3D processing
+trimesh>=4.0.0
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Image processing
+Pillow>=10.0.0
+opencv-python-headless>=4.8.0
+
+# Data management
+tqdm>=4.66.0
+PyYAML>=6.0
+
+# Mesh → voxel conversion
+scikit-image>=0.21.0
+
+# Optional: faster STL parsing
+numpy-stl>=3.0.0
+
+# Optional: visualization
+matplotlib>=3.7.0
