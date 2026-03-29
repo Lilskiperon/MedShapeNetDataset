@@ -59,8 +59,8 @@ def _build_scheduler(
     return optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lambda _: 1.0)
 
 
-def _iou_metric(logits: torch.Tensor, targets: torch.Tensor) -> float:
-    """Binary IoU for logging (uses 0.5 threshold)."""
+def _smoothed_iou_metric(logits: torch.Tensor, targets: torch.Tensor) -> float:
+    """Smoothed binary IoU for logging (uses 0.5 threshold)."""
     preds = (torch.sigmoid(logits) >= 0.5).float()
     intersection = (preds * targets).sum().item()
     union = (preds + targets - preds * targets).sum().item()
@@ -186,7 +186,7 @@ def train(config: dict) -> None:
             optimizer.step()
 
             train_loss += loss_dict["total"]
-            train_iou += _iou_metric(logits.detach(), voxels)
+            train_iou += _smoothed_iou_metric(logits.detach(), voxels)
 
             if batch_idx % log_interval == 0:
                 print(
@@ -215,7 +215,7 @@ def train(config: dict) -> None:
                 logits = model(images)
                 _, loss_dict = criterion(logits, voxels)
                 val_loss += loss_dict["total"]
-                val_iou += _iou_metric(logits, voxels)
+                val_iou += _smoothed_iou_metric(logits, voxels)
 
         val_loss /= max(len(val_loader), 1)
         val_iou /= max(len(val_loader), 1)

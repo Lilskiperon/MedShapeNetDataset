@@ -107,6 +107,45 @@ MedShapeNetDataset/
 
 ---
 
+
+## Dataset Needed for Kaggle Training
+
+For Kaggle notebooks, start with a **single anatomical category** and a small subset:
+
+- `liver` (recommended first run): **300–1000 STL** files
+- `vertebrae`: **300–1000 STL** files
+- `tumoredbrain`: **200–800 STL** files
+
+Why this subset:
+
+- fits Kaggle disk/runtime limits better,
+- gives stable training signal,
+- allows fast iteration before scaling to multi-category training.
+
+Use the downloader:
+
+```bash
+python scripts/download_dataset.py \
+    --url-file MedShapeNetDataset.txt \
+    --category liver \
+    --max-samples 300 \
+    --output-dir data/stl
+```
+
+## Kaggle Notebook Training
+
+A ready-to-run notebook is provided:
+
+- `notebooks/kaggle_medshapenet_training.ipynb`
+
+It includes:
+
+1. category inspection from `MedShapeNetDataset.txt`,
+2. subset download,
+3. STL preprocessing to voxel + 2D projections,
+4. light training config for Kaggle (few epochs),
+5. inference and STL export.
+
 ## Quick Start
 
 ### 1. Install dependencies

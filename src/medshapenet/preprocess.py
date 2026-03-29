@@ -34,9 +34,9 @@ except ImportError:
 # ---------------------------------------------------------------------------
 
 _DEFAULT_VIEW_DIRECTIONS: list[tuple[str, np.ndarray]] = [
-    ("axial",      np.array([0.0, 0.0, 1.0])),   # top-down
-    ("sagittal",   np.array([1.0, 0.0, 0.0])),   # left-right
-    ("coronal",    np.array([0.0, 1.0, 0.0])),   # front-back
+    ("axial",      np.array([0.0, 0.0, 1.0])),   # superior-inferior (top-down)
+    ("sagittal",   np.array([1.0, 0.0, 0.0])),   # left-to-right through body midline
+    ("coronal",    np.array([0.0, 1.0, 0.0])),   # anterior-to-posterior (front-to-back)
     ("oblique_1",  np.array([1.0, 1.0, 0.0]) / np.sqrt(2)),
     ("oblique_2",  np.array([0.0, 1.0, 1.0]) / np.sqrt(2)),
     ("oblique_3",  np.array([1.0, 0.0, 1.0]) / np.sqrt(2)),

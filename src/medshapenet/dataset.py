@@ -137,6 +137,10 @@ class MedShapeNetDataset(Dataset):
       the rendered 2D projections (normalised to ``[0, 1]``).
     * ``voxels`` — float32 tensor of shape ``(1, D, D, D)`` containing the
       binary occupancy grid (0 or 1).
+
+    Parameters
+    ----------
+    data_dir:
         Root directory produced by ``batch_preprocess``, containing
         ``<category>/`` sub-directories.
     category:
