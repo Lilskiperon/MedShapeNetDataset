@@ -1,0 +1,49 @@
+# Default training configuration for MedShapeNet 3D Synthesis System
+
+dataset:
+  url_file: "MedShapeNetDataset.txt"
+  data_dir: "data/processed"
+  category: "liver"          # target anatomical category
+  voxel_size: 64             # spatial resolution of the voxel grid (NxNxN)
+  num_views: 3               # number of 2D input views per sample
+  image_size: 128            # height and width of input 2D projections
+  train_split: 0.8
+  val_split: 0.1
+  test_split: 0.1
+
+model:
+  encoder: "resnet18"        # 2D encoder backbone (currently only resnet18 is supported)
+  encoder_pretrained: true
+  feature_dim: 512           # encoder output dimension per view
+  decoder_channels: [512, 256, 128, 64, 32]  # 3D decoder channel progression
+  use_attention: true        # multi-view attention fusion
+
+training:
+  batch_size: 8
+  num_epochs: 100
+  learning_rate: 1.0e-4
+  weight_decay: 1.0e-5
+  lr_scheduler: "cosine"     # cosine | step | none
+  warmup_epochs: 5
+  bce_weight: 1.0
+  iou_weight: 1.0
+  grad_clip: 1.0
+  num_workers: 4
+  seed: 42
+
+augmentation:
+  random_rotation: true
+  rotation_range: 30         # degrees
+  intensity_jitter: true
+  jitter_strength: 0.1
+  random_view_dropout: true  # randomly drop input views during training
+  dropout_prob: 0.2
+
+checkpointing:
+  checkpoint_dir: "checkpoints"
+  save_every_n_epochs: 10
+  keep_best_n: 3
+
+logging:
+  log_dir: "logs"
+  log_interval: 10           # log every N batches
