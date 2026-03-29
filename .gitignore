@@ -1,0 +1,29 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Build / distribution
+dist/
+build/
+*.egg-info/
+
+# Data directories (large, downloaded on demand)
+data/
+
+# Model checkpoints
+checkpoints/
+
+# Logs
+logs/
+
+# OS metadata
+.DS_Store
+Thumbs.db
